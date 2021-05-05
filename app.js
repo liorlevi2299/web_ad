@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+
+const modelRoutes = require('./api/routes/model');
 
 app.use((req,res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,11 +14,24 @@ app.use((req,res, next) => {
     }
     next();
 });
-app.get('/', (req, res) => {
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
+
+app.use('/api',modelRoutes);
+
+/*app.get('/', (req, res) => {
     res.status(200).json({
         message: 'Hello World 4'
     })
 });
+app.post('/articles', (req, res) => {
+    res.status(200).json({
+        message: req.body.message
+    })
+});*/
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
