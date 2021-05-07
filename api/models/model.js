@@ -16,18 +16,19 @@ const mongoose = require('mongoose');
 
 const modelSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    timeStamp : _id.getTimestamp(),
-    type_type: { type: String, required: true },
+    //timeStamp : .Timestamp,
+    query_type: { type: String},
     status: { type: String },
-    list: {type: List},
+    //list: {type: List},
 });
 
 module.exports = mongoose.model('model', modelSchema);
 
+/*
 const objectListModel = {
     feature: '',
     featureCorr: '',
     corrVal: '',
     threshold: '',
     AD_type: ''
-}
+}*/

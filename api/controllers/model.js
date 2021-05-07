@@ -1,5 +1,7 @@
 const Model = require('../models/model');
 const mongoose = require("mongoose");
+const MongoDB = require('mongodb');
+
 module.exports = {
     getModel: (req, res) => {
         res.status(200).json({
@@ -15,9 +17,9 @@ module.exports = {
         //const {title, description, content} = req.body;
         const model = new Model({
             _id: new mongoose.Types.ObjectId(),
-            title: req.body.title,
-            description: req.body.description,
-            content: req.body.content
+            //timeStamp: new mongoose.Types.ObjectId().getTimestamp(),
+            query_type: req.query.model_type,
+            status: "pending",
         });
         model.save()
             .then(()=>{

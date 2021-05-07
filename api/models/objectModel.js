@@ -1,4 +1,5 @@
-/*const mongoose = require('mongoose');
+/*
+/!*const mongoose = require('mongoose');
 
 const modelScheme = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -8,7 +9,7 @@ const modelScheme = mongoose.Schema({
     //upload_time: {type: }
 });
 
-module.exports= mongoose.model('model', modelScheme);*/
+module.exports= mongoose.model('model', modelScheme);*!/
 const mongoose = require('mongoose');
 var List = require("collections/list");
 
@@ -21,4 +22,4 @@ const modelSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('Model', modelSchema);
+module.exports = mongoose.model('Model', modelSchema);*/
