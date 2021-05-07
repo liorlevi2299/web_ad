@@ -15,15 +15,4 @@ router.delete('/model',deleteModel);
 router.get('/models',getModelsState);
 router.get('/anomaly',getAnomaly);
 
-/*router.patch('/:modelID', (req, res) => {
-    const modelID = req.params.modelID
-    res.status(200).json({
-        message: `Hello World ${modelID}`
-    })
-})
-router.delete('/model', (req, res) => {
-    res.status(200).json({
-        message: 'Hello World post'
-    })
-})*/
- module.exports = router;
+module.exports = router;
