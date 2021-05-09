@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CSV to JSON</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <script src="convert.js"></script> -->
+  &lt;!&ndash; <script src="convert.js"></script> &ndash;&gt;
 </head>
 <body style="text-align:center">
 CSV to JSON
@@ -64,5 +65,28 @@ CSV to JSON
 <br>
 <input type="file" id="fileUpload" />
 <input type="button" id="upload" value="Upload" onclick="Upload()" />
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CSV to JSON</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="test.css">
+
+  <!-- <script src="convert.js"></script> -->
+</head>
+<body style="text-align:center">
+CSV to JSON
+<script type="text/javascript" src="test.js"></script>
+<br>
+<input type="file" id="fileUpload" accept=".csv"/>
+<input type="button" id="upload" value="Upload" onclick="Upload()" />
+<ol id="featuresList">
+
+</ol>
 </body>
 </html>

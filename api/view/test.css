@@ -1,0 +1,25 @@
+
+ol {
+    width: 200px;
+    height: 180px;
+    overflow-y: auto;
+}
+
+ol li {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+
+}
+
+ol li:hover {
+    background-color: #ccc;
+}
+
+ol li:active {
+    background-color: yellow;
+    color: black;
+
+}
