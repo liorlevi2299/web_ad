@@ -11,8 +11,8 @@ const {
 
 router.get('/', get);
 router.post('/detect',postModel);
-router.delete('/model',deleteModel);
-router.get('/models',getModelsState);
-router.get('/anomaly',getAnomaly);
+//router.delete('/model',deleteModel);
+//router.get('/models',getModelsState);
+//router.get('/anomaly',getAnomaly);
 
 module.exports = router;
