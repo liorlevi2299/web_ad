@@ -24,7 +24,7 @@ class anomalyDetector {
         }
         return ps;
     }
-    findThreshold(ps, len,rl) {
+    findThreshold(ps, len, rl) {
         let max = 0;
         for (let i = 0; i < len; i++) {
             let d = Math.abs(ps[i].y - rl.f(ps[i].x));
@@ -88,8 +88,8 @@ class anomalyDetector {
             let arr_y = dataTest[this.cf[i].featureCorr];
             for(let  j=0;j<arr_x.length; j++){
                 if(this.isAnomalous(arr_x[j],arr_y[j], this.cf[i])){
-                    let d = this.cf[i].feature;
-                    //let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
+                    //let d = this.cf[i].feature;
+                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
                     anomalies.push(new AnomalyReport(d,(j+1)));
                 }
             }
@@ -113,3 +113,4 @@ class anomalyDetector {
         }
     }
 }
+module.exports = anomalyDetector;
