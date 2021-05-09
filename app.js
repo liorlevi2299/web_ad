@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const app = express();
 const modelRoutes = require('./api/routes/model');
@@ -19,10 +20,10 @@ mongoose.connection.on ('connected', ()=> {
 
 app.use('/api',modelRoutes);
 
-/*app.use(express.json());
+/!*app.use(express.json());
 app.use(express.urlencoded({
     extended: false
-}));*/
+}));*!/
 
 app.use((req,res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -55,4 +56,4 @@ app.use((error,req, res, next) => {
 })
 
 
-module.exports = app;
+module.exports = app;*/
