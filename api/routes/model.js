@@ -15,5 +15,4 @@ router.delete('/model',deleteModel);
 router.get('/models',getModelsState);
 router.get('/anomaly',getAnomaly);
 
-
- module.exports = router;
+module.exports = router;

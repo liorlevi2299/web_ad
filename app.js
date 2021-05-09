@@ -1,9 +1,28 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
-
-
 const modelRoutes = require('./api/routes/model');
+const mongoose = require("mongoose");
+const bosyParser = require('body-parser');
+
+
+app.use(bosyParser.json());
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@db-api.256lx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+
+});
+
+mongoose.connection.on ('connected', ()=> {
+    console.log('MongoDB Connected');
+});
+
+app.use('/api',modelRoutes);
+
+/*app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));*/
 
 app.use((req,res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -14,24 +33,11 @@ app.use((req,res, next) => {
     }
     next();
 });
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: false
-}));
-
-app.use('/api',modelRoutes);
-
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json({
         message: 'Hello World 4'
     })
 });
-app.post('/articles', (req, res) => {
-    res.status(200).json({
-        message: req.body.message
-    })
-});*/
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
