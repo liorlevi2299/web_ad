@@ -4,6 +4,8 @@ class CorrFeatures{
     correlation;
     line_reg;
     threshold;
+    cx;
+    cy;
 
     constructor(feature, featureCorr, correlation , line_reg, threshold) {
         this.feature = feature;
