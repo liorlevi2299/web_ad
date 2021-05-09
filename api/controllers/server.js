@@ -1,7 +1,7 @@
 const http=require('http');
 const fs=require('fs')
-const model=require('../Model/SearchInFile')
-
+const model = require('../models/SearchInFile')
+const anomalyDetector = require('../models/anomaly detector/anomalyDetector');
 
 
 function displayFormCommand(req, res){
