@@ -2,37 +2,40 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const model = require('../models/SearchInFile')
 const bodyParser = require('body-parser')
-const anomalyDetector = require('../models/anomaly detector/anomalyDetector');
+const anomalyDetector = require("../models/anomaly detector/anomalyDetector");
+const app = express()
+
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+
 // require csvtojson module
 
 
 
-const app = express()
 app.use(fileUpload())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
-app.use(express.static('../view'))
+app.use(express.static("../view"))
+//console.log(window.location.path)
 app.get("/", (req, res) => {
-    res.sendFile('test.html', {root: '../view'})
+    res.sendFile("test.html", {root: '../view'})
+
 })
-app.use(express.json()); ////////////////
+var anomalyDetect = new anomalyDetector(0.9);
+app.use(express.json({limit: '100mb'}))
+app.post("/learn", function (req, res) {
+    //anomalyDetect.isHybrid = req.query
+    anomalyDetect.isHybrid = true;
+    anomalyDetect.learnNormal(req.body)
+    res.end()
+})
+
 app.post("/detect", function (req, res) {
-    console.log('request is:');
-    console.log(req.body);
-    //res.write('searching for ' + req.body.key+ +':\n')
-    //let key = req.body.key
-    if(req.files) {
-        let file = req.files.text_file
-        var anomalyDetect = new anomalyDetector(true, 0.9);
-        console.log("after anomal")
-        anomalyDetect.learnNormal(JSON.parse(file.data))
-        console.log(req.body)
-        let result = model.searchText(key, file.data.toString())
-        res.write(file.data)
-    }
+    //console.log(req.body);
+    res.write(JSON.stringify(anomalyDetect.detect(req.body)));
     res.end()
 })
 app.listen(8080)

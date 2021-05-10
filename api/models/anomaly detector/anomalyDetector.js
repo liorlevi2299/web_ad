@@ -11,10 +11,12 @@ class anomalyDetector {
     cf;
     thresholdCorr;
     regress_AD;
+    mult_thresh;
     constructor(th) {
         this.cf = [];
         this.thresholdCorr = th;
         this.regress_AD = new anomalyFunc();
+        this.mult_thresh = 1;
     }
     toPoints(arr_x, arr_y){
         let ps = [];
@@ -76,7 +78,7 @@ class anomalyDetector {
                 c.featureCorr = f2;
                 c.correlation = p;
                 c.line_reg = this.regress_AD.linear_reg(ps, numRows)
-                c.threshold = this.findThreshold(ps, len, c.line_reg) * 1.1;
+                c.threshold = this.findThreshold(ps, len, c.line_reg) * this.mult_thresh;
                 this.cf.push(c);
             }
             //hybrid anomaly detector
@@ -87,7 +89,7 @@ class anomalyDetector {
                     c.feature = f1;
                     c.featureCorr = f2;
                     c.correlation = p;
-                    c.threshold = minCircle.r * 1.1;
+                    c.threshold = minCircle.r * this.mult_thresh;
                     c.cx = minCircle.x;
                     c.cy = minCircle.y;
                     this.cf.push(c);
@@ -142,7 +144,8 @@ class anomalyDetector {
     }
     isAnomalous(x, y, c) {
         if (c.correlation > this.thresholdCorr) {
-            return (Math.abs(y - c.line_reg.f(x))>c.threshold);
+            let dist = Math.abs(y - c.line_reg.f(x));
+            return (dist > c.threshold);
         }
         else if ((c.correlation> 0.5) && (this.isHybrid)) {
             let p1 = new Point(x, y);

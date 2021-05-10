@@ -27,7 +27,7 @@ function Upload() {
             var reader = new FileReader();
             reader.onload = function (e) {
                 //console.log("Raw File");
-                console.log(e);
+                //console.log(e);
                 var lines=e.target.result.split('\n');
                 for(let i = 0; i<lines.length; i++){
                     lines[i] = lines[i].replace(/\s/,'')//delete all blanks
@@ -53,15 +53,32 @@ function Upload() {
                 }
 
                 //return result; //JavaScript object
-                console.log(result);
-                console.log('call set keys')
+                //console.log(result);
+                //console.log('call set keys')
                 setKeys();
                 //setKeysTry();
 
-                console.log("After JSON Conversion");
-                console.log(result);
-                console.log(JSON.stringify(result));
+                //console.log("After JSON Conversion");
+                //console.log(result);
+               // console.log(JSON.stringify(result));
                 //let x = JSON.stringify(result);
+                let hybrid = true;
+                let test = 5;
+                const data = {hybrid,test }
+                //const data = {result, hybrid};
+
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    //body: JSON.stringify(result2)
+                    body: JSON.stringify(result)
+
+                };
+                const response = fetch('/detect', options);
+
+
 
                 return JSON.stringify(result); //JSON
 
@@ -104,7 +121,9 @@ async function uploadToServer () {
         headers: {
             'Content-Type': 'application/json'
         },
+        //body: JSON.stringify(result2)
         body: JSON.stringify(result2)
+
     };
     const response = await fetch('/detect', options);
     const data1 = await response.json();
