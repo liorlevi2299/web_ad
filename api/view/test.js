@@ -1,6 +1,6 @@
 const result = [];
 
-document.getElementById('upload').addEventListener('click',function (){ Upload() } );
+//document.getElementById('upload').addEventListener('click',function (){ Upload() } );
 
 
 function setKeys() {
