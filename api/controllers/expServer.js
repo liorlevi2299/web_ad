@@ -19,11 +19,13 @@ app.use(express.static("../view"))
 app.get("/", (req, res) => {
     res.sendFile("test.html", {root: '../view'})
 
-    res.sendFile("C:\\Users\\azran\\WebstormProjects\\web_ad\\test.html")
+    //res.sendFile("C:\\Users\\azran\\WebstormProjects\\web_ad\\test.html")
 })
-var anomalyDetect = new anomalyDetector(true, 0.9);
+var anomalyDetect = new anomalyDetector( 0.9);
 
 app.post("/learn", function (req, res) {
+    //anomalyDetect.isHybrid = req.query
+    anomalyDetect.isHybrid = true;
     anomalyDetect.learnNormal(req.body)
     res.end()
 })

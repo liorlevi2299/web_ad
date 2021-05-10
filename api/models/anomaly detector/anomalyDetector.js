@@ -11,8 +11,7 @@ class anomalyDetector {
     cf;
     thresholdCorr;
     regress_AD;
-    constructor(isHybrid,th) {
-        this.isHybrid = isHybrid;
+    constructor(th) {
         this.cf = [];
         this.thresholdCorr = th;
         this.regress_AD = new anomalyFunc();
