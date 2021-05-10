@@ -1,6 +1,9 @@
 const express = require('express')
 const fileUpload = require('express -fileupload')
-const model = require('../Model/SearchInFile')
+const model = require('../models/SearchInFile')
+const anomalyDetector = require('../models/anomaly detector/anomalyDetector');
+
+//anomalyDetector = new anomalyDetector()
 
 const app = express()
 app.use(express.urlencoded({
@@ -11,8 +14,12 @@ app.use(express.static('../View'))
 app.get("/", (req, res) => {
     res.sendFile("index.html")
 })
-app.post("/search", (req, res) => {
+app.post("/detect", (req, res) => {
+    //let jsonReg;
+    //let jsonRun;
+
     res.write('searching for ' + req.body.key+ +':\n')
+    //let type = req.query[]
     let key = req.body.key
     if(req.files) {
         let file = req.files.text_file
