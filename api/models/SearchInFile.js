@@ -1,3 +1,5 @@
+
+
 function  searchText(key, text){
     let result=''
     text.split("\n").forEach(row=>{
@@ -6,5 +8,6 @@ function  searchText(key, text){
     })
     return result
 }
+
 
 module.exports.searchText = searchText
