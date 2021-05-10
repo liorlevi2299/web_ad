@@ -24,21 +24,12 @@ app.get("/", (req, res) => {
 var anomalyDetect = new anomalyDetector(true, 0.9);
 
 app.post("/learn", function (req, res) {
-
-    //res.write('searching for ' + req.body.key+ +':\n')
-    //let key = req.body.key
-
     anomalyDetect.learnNormal(req.body)
+    res.end()
+})
 
-/*    if(req.files) {
-        let file = req.files.text_file
-        var anomalyDetect = new anomalyDetector(true, 0.9);
-        console.log("after anomal")
-        anomalyDetect.learnNormal(JSON.parse(file.data))
-        console.log(req.body)
-        //let result = model.searchText(key, file.data.toString())
-        res.write(file.data)
-    }*/
+app.post("/detect", function (req, res) {
+    res.write(JSON.stringify(anomalyDetect.detect(req.body)));
     res.end()
 })
 app.listen(8080)

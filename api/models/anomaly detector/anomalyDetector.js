@@ -97,22 +97,44 @@ class anomalyDetector {
         }
     }
     detect(dataTest){
-        let anomalies;
-        let len = this.cf.length;
+        let anomalies = [];
+        let cf_len = this.cf.length;
+        for (let i = 0; i < cf_len; i++) {
+            let name = this.cf[i].feature;
+            let arr_x = dataTest[this.find_key(this.cf[i].feature, dataTest)];
+            let arr_y = dataTest[this.find_key(this.cf[i].featureCorr, dataTest)];
+            //let len_arr = arr_x.length;
+            let arr_xx = Object.values(arr_x)[0];
+            let numRow = arr_xx.length;
+            let arr_yy = Object.values(arr_y)[0];
+            let list_anomalies = [];
+            for(let  j=0;j<numRow; j++){
+                let xx_j = parseFloat(arr_xx[j]);
+                let yy_j = parseFloat(arr_yy[j]);
 
-        for (let i = 0; i < len; i++) {
-            let arr_x = dataTest[this.cf[i].feature];
-            let arr_y = dataTest[this.cf[i].featureCorr];
-            for(let  j=0;j<arr_x.length; j++){
-                if(this.isAnomalous(arr_x[j],arr_y[j], this.cf[i])){
+                if(this.isAnomalous(xx_j,yy_j, this.cf[i])){
                     //let d = this.cf[i].feature;
-                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
-                    anomalies.push(new AnomalyReport(d,(j+1)));
+/*                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
+                    anomalies.push(new AnomalyReport(d,(j+1)));*/
+                    list_anomalies.push(j+1);
                 }
+            }
+            if (list_anomalies.length > 0){
+                let object = { [name] :list_anomalies};
+                anomalies.push(object);
             }
         }
         return anomalies;
     }
+    find_key(key_feature, dataTest) {
+        let len = dataTest.length;
+        for (let i = 0; i < len; i++) {
+            if (this.cf[i].feature === key_feature ){
+                return i;
+            }
+        }
+    }
+
     dist(p1, p2) {
         let a = p1.x - p2.x;
         let b = p1.y - p2.y;
@@ -120,7 +142,7 @@ class anomalyDetector {
         return Math.sqrt( a*a + b*b );
     }
     isAnomalous(x, y, c) {
-        if (c.correlation> this.thresholdCorr) {
+        if (c.correlation > this.thresholdCorr) {
             return (Math.abs(y - c.line_reg.f(x))>c.threshold);
         }
         else if ((c.correlation> 0.5) && (this.isHybrid)) {
@@ -129,16 +151,6 @@ class anomalyDetector {
             return (Math.abs(this.dist(p1, p2)) > c.threshold);
         }
     }
-
-
 }
 
 module.exports = anomalyDetector;
-
-/*
-function main() {
-    //let json = {"altitude_gps": [100, 110, 20, 120], "heading_gps": [0.6, 0.59, 0.54, 0.51] };
-    this.learnNormal({"altitude_gps": [100, 110, 20, 120],
-        "heading_gps": [0.6, 0.59, 0.54, 0.51] });
-    let c = this.cf;
-}*/
