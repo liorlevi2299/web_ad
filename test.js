@@ -10,7 +10,9 @@ function setKeys() {
         let li = document.createElement('li');
         li.innerText = Object.keys(result[key]).toString();
         li.id = 'feat'+key;
-        li.onclick = function () { changeColor(li.id)};
+        li.onclick = function () {
+            showGraph(key.toString());
+            changeColor(li.id)};
         list.appendChild(li);
         console.log(Object.keys(result[key]).toString());
     })
