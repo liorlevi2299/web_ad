@@ -14,10 +14,10 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
-//app.use(express.static("../"))
+app.use(express.static("../view"))
 //console.log(window.location.path)
 app.get("/", (req, res) => {
-    //res.sendFile("../test.html")
+    res.sendFile("test.html", {root: '../view'})
 
     res.sendFile("C:\\Users\\azran\\WebstormProjects\\web_ad\\test.html")
 })
