@@ -38,7 +38,7 @@ class anomalyDetector {
         let len = corrFeatures.length;
 
         for(let i=0; i<len; i++){
-            let f1 = corrFeatures[i];
+            var f1 = corrFeatures[i];
             let max=0;
             let jmax=0;
             let p;
