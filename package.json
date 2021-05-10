@@ -3,33 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node /controllers/server.js"
+    "start": "node Controller/expServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "body-parser": "^1.19.0",
     "collections": "^5.1.12",
-    "csvtojson": "^2.0.10",
     "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
     "mongoose": "^5.12.7",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.7",
-    "react-dom": "^17.0.2"
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {
     "mongodb": "^3.6.6",
     "smallest-enclosing-circle": "^1.0.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/azranohad/web_ad.git"
-  },
-  "bugs": {
-    "url": "https://github.com/azranohad/web_ad/issues"
-  },
-  "homepage": "https://github.com/azranohad/web_ad#readme",
-  "description": ""
+  }
 }
