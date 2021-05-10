@@ -18,9 +18,12 @@ app.use(express.static('../view'))
 app.get("/", (req, res) => {
     res.sendFile('test.html', {root: '../view'})
 })
+app.use(express.json()); ////////////////
 app.post("/detect", function (req, res) {
-    res.write('searching for ' + req.body.key+ +':\n')
-    let key = req.body.key
+    console.log('request is:');
+    console.log(req.body);
+    //res.write('searching for ' + req.body.key+ +':\n')
+    //let key = req.body.key
     if(req.files) {
         let file = req.files.text_file
         var anomalyDetect = new anomalyDetector(true, 0.9);

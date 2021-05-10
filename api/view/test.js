@@ -59,7 +59,7 @@ function Upload() {
                 //setKeysTry();
 
                 console.log("After JSON Conversion");
-
+                console.log(result);
                 console.log(JSON.stringify(result));
                 //let x = JSON.stringify(result);
 
@@ -84,5 +84,35 @@ function changeColor (string) {
             document.getElementById('feat' + i).style.background = "#eee";
         }
     }
+
+}
+
+async function uploadToServer () {
+    await Upload();
+    //$.post('/detect', JSON.stringify(result));
+    let json = JSON.stringify(result);
+    let result2 = {'a': result};
+    let x = typeof result;
+    console.log(x);
+    let hybrid = true;
+    let test = 5;
+    const data = {hybrid,test }
+    //const data = {result, hybrid};
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(result2)
+    };
+    const response = await fetch('/detect', options);
+    const data1 = await response.json();
+    console.log(data1);
+    /*fetch('/detect', options).then(res => {
+        console.log(res);
+    }).catch(res => {
+        console.log(res);
+    });*/
 
 }
