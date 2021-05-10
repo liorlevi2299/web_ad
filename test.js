@@ -1,5 +1,8 @@
 const result = [];
 
+document.getElementById('upload').addEventListener('click',function (){ Upload() } );
+
+
 function setKeys() {
     const keys = Object.keys(result);
     let list = document.getElementById('featuresList');
