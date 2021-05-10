@@ -14,9 +14,9 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
-app.use(express.static('../View'))
+app.use(express.static('../view'))
 app.get("/", (req, res) => {
-    res.sendFile("index.html")
+    res.sendFile('test.html', {root: '../view'})
 })
 app.post("/detect", function (req, res) {
     res.write('searching for ' + req.body.key+ +':\n')
