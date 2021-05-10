@@ -30,6 +30,7 @@ app.post("/learn", function (req, res) {
     //anomalyDetect.isHybrid = req.query
     anomalyDetect.isHybrid = true;
     anomalyDetect.learnNormal(req.body)
+    res.write("The file was uploaded successfully!")
     res.end()
 })
 
