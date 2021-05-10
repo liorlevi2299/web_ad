@@ -7,12 +7,11 @@ const AnomalyReport = require("./AnomalyReport");
 
 
 class anomalyDetector {
-    itsHybrid;
+    isHybrid;
     cf;
     thresholdCorr;
     regress_AD;
-    constructor(itsHybrid,th) {
-        this.itsHybrid = itsHybrid;
+    constructor(th) {
         this.cf = [];
         this.thresholdCorr = th;
         this.regress_AD = new anomalyFunc();
@@ -20,54 +19,71 @@ class anomalyDetector {
     toPoints(arr_x, arr_y){
         let ps = [];
         for(let i=0;i<arr_x.length; i++){
-            ps[i] = new Point(arr_x[i],arr_y[i]);
+            ps[i] = new Point(parseFloat(arr_x[i]) ,parseFloat(arr_y[i]));
         }
         return ps;
     }
     findThreshold(ps, len, rl) {
         let max = 0;
         for (let i = 0; i < len; i++) {
-            let d = Math.abs(ps[i].y - rl.f(ps[i].x));
+            let ps_y= parseFloat(ps[i].y);
+            let ps_x= rl.f((parseFloat(ps[i].x) ));
+            let d = Math.abs(ps_y - ps_x);
             if (d > max)
                 max = d;
         }
         return max;
     }
     learnNormal(dataTrain){
-        let corrFeatures = Object.keys(dataTrain);
-        let len = corrFeatures.length;
+        //let x = dataTrain[14].
+        let len = dataTrain.length;
+        let corrFeatures = []
+
+        for (let i = 0; i < len; i++) {
+            corrFeatures[i] = Object.keys(dataTrain[i])
+        }
 
         for(let i=0; i<len; i++){
-            var f1 = corrFeatures[i];
+            let f1 = corrFeatures[i][0];
             let max=0;
             let jmax=0;
             let p;
-            for(let j=i+1; j<len ;j++){
-                p = Math.abs(this.regress_AD.pearson(dataTrain[corrFeatures[i]], dataTrain[corrFeatures[j]],len));
-                if(p > max){
-                    max=p;
-                    jmax=j;
+            let f2
+            let numRows = dataTrain[i][corrFeatures[i]].length
+
+            //let y = dataTrain[i][corrFeatures[i]]
+            var arr_i = dataTrain[i][corrFeatures[i]];
+
+            for(let j=0; j<len ;j++){
+                let arr_j = dataTrain[j][corrFeatures[j]];
+                if (i !== j){
+                    p = Math.abs(this.regress_AD.pearson(arr_i, arr_j,numRows));
+                    if(p >= max){
+                        max=p;
+                        jmax = j;
+                    }
                 }
+                f2 = corrFeatures[jmax][0];
             }
-            let f2 = corrFeatures[jmax];
-            let ps = this.toPoints(dataTrain[f1], dataTrain[f2]);
+            var arr_corr =  dataTrain[jmax][corrFeatures[jmax]];
+
+            let ps = this.toPoints(arr_i, arr_corr);
 
         //the regression
-            if (p > this.threshold){
-                let row_size = dataTrain[f1].length;
-                let c;
+            if (p > this.thresholdCorr){
+                let c = new CorrFeatures();
                 c.feature = f1;
                 c.featureCorr = f2;
                 c.correlation = p;
-                c.line_reg = this.regress_AD.line_reg(ps, row_size)
+                c.line_reg = this.regress_AD.linear_reg(ps, numRows)
                 c.threshold = this.findThreshold(ps, len, c.line_reg) * 1.1;
                 this.cf.push(c);
             }
             //hybrid anomaly detector
-            else if (this.itsHybrid === true) {
+            else if (this.isHybrid === true) {
                 if (p > 0.5) {
                     let minCircle = new enclosingCircle(ps);
-                    let c;
+                    let c = new CorrFeatures();
                     c.feature = f1;
                     c.featureCorr = f2;
                     c.correlation = p;
@@ -80,22 +96,44 @@ class anomalyDetector {
         }
     }
     detect(dataTest){
-        let anomalies;
-        let len = this.cf.length;
+        let anomalies = [];
+        let cf_len = this.cf.length;
+        for (let i = 0; i < cf_len; i++) {
+            let name = this.cf[i].feature;
+            let arr_x = dataTest[this.find_key(this.cf[i].feature, dataTest)];
+            let arr_y = dataTest[this.find_key(this.cf[i].featureCorr, dataTest)];
+            //let len_arr = arr_x.length;
+            let arr_xx = Object.values(arr_x)[0];
+            let numRow = arr_xx.length;
+            let arr_yy = Object.values(arr_y)[0];
+            let list_anomalies = [];
+            for(let  j=0;j<numRow; j++){
+                let xx_j = parseFloat(arr_xx[j]);
+                let yy_j = parseFloat(arr_yy[j]);
 
-        for (let i = 0; i < len; i++) {
-            let arr_x = dataTest[this.cf[i].feature];
-            let arr_y = dataTest[this.cf[i].featureCorr];
-            for(let  j=0;j<arr_x.length; j++){
-                if(this.isAnomalous(arr_x[j],arr_y[j], this.cf[i])){
+                if(this.isAnomalous(xx_j,yy_j, this.cf[i])){
                     //let d = this.cf[i].feature;
-                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
-                    anomalies.push(new AnomalyReport(d,(j+1)));
+/*                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
+                    anomalies.push(new AnomalyReport(d,(j+1)));*/
+                    list_anomalies.push(j+1);
                 }
+            }
+            if (list_anomalies.length > 0){
+                let object = { [name] :list_anomalies};
+                anomalies.push(object);
             }
         }
         return anomalies;
     }
+    find_key(key_feature, dataTest) {
+        let len = dataTest.length;
+        for (let i = 0; i < len; i++) {
+            if (this.cf[i].feature === key_feature ){
+                return i;
+            }
+        }
+    }
+
     dist(p1, p2) {
         let a = p1.x - p2.x;
         let b = p1.y - p2.y;
@@ -103,14 +141,15 @@ class anomalyDetector {
         return Math.sqrt( a*a + b*b );
     }
     isAnomalous(x, y, c) {
-        if (c.correlation> this.thresholdCorr) {
+        if (c.correlation > this.thresholdCorr) {
             return (Math.abs(y - c.line_reg.f(x))>c.threshold);
         }
-        else if ((c.correlation> 0.5) && (this.itsHybrid)) {
+        else if ((c.correlation> 0.5) && (this.isHybrid)) {
             let p1 = new Point(x, y);
             let p2 = new Point(c.cx, c.cy)
             return (Math.abs(this.dist(p1, p2)) > c.threshold);
         }
     }
 }
+
 module.exports = anomalyDetector;

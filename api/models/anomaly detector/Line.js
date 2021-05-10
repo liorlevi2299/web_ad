@@ -7,7 +7,7 @@ class Line {
     }
 
     f(x) {
-        return a * x + b;
+        return (this.a * x) + this.b;
     }
 }
 module.exports = Line;
