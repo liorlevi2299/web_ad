@@ -1,78 +1,73 @@
-const result = [];
-
-//document.getElementById('upload').addEventListener('click',function (){ Upload() } );
+let detectCSV = [];
+let learnCSV = [];
 
 
 function setKeys() {
-    const keys = Object.keys(result);
+    const keys = Object.keys(learnCSV);
     let list = document.getElementById('featuresList');
     keys.forEach(function(key) {
         let li = document.createElement('li');
-        li.innerText = Object.keys(result[key]).toString();
+        li.innerText = Object.keys(learnCSV[key]).toString();
         li.id = 'feat'+key;
         li.onclick = function () {
-            showGraph(key.toString());
-            changeColor(li.id)};
+        showGraph(key.toString()).catch(err => {});
+        changeColor(li.id)};
         list.appendChild(li);
-        console.log(Object.keys(result[key]).toString());
+        console.log(Object.keys(learnCSV[key]).toString());
     })
 }
 
-function Upload() {
-    var fileUpload = document.getElementById("fileUpload");
-    //console.log(fileUpload);
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+function uploadDetect() {
+    detectCSV = []; // emptying the array for next use
+    let fileUpload = document.getElementById("detectUpload");
+    let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
         if (typeof (FileReader) != "undefined") {
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.onload = function (e) {
-                //console.log("Raw File");
                 console.log(e);
-                var lines=e.target.result.split('\n');
+                let lines=e.target.result.split('\n');
                 for(let i = 0; i<lines.length; i++){
                     lines[i] = lines[i].replace(/\s/,'')//delete all blanks
                 }
-                //var result = [];
 
-                var headers=lines[0].split(",");
+                let headers=lines[0].split(",");
 
-                for(var i=0;i<headers.length;i++){
+                for(let i=0;i<headers.length;i++){
 
-                    var obj = {};
-                    /*var currentline=lines[i].split(",");*/
-                    var currentColumn = [];
+                    let obj = {};
+                    let currentColumn = [];
 
-                    for(var j=1;j<lines.length - 1;j++){
-                        var currentline=lines[j].split(",");
+                    for(let j=1;j<lines.length - 1;j++){
+                        let currentline=lines[j].split(",");
                         currentColumn.push(currentline[i]);
 
                     }
                     obj[headers[i]] = currentColumn;
-                    result.push(obj);
+                    detectCSV.push(obj);
 
                 }
 
-                //return result; //JavaScript object
-                console.log(result);
-                console.log('call set keys')
-                setKeys();
-                //setKeysTry();
+                console.log(detectCSV);
+                console.log("After detect JSON Conversion");
+                console.log(JSON.stringify(detectCSV));
 
-                console.log("After JSON Conversion");
-                console.log(result);
-                console.log(JSON.stringify(result));
-                //let x = JSON.stringify(result);
                 const options = {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(result)
+                    body: JSON.stringify(detectCSV)
                 };
                 const response = fetch('/detect', options);
+                /*if(document.getElementById('regression').checked){
+                    const response = fetch('/detect?model_type=regression', options);
+                } else if (document.getElementById('hybrid').checked) {
+                    const response = fetch('/detect?model_type=hybrid', options);
+                }*/
 
 
-                return JSON.stringify(result); //JSON
+                return JSON.stringify(detectCSV); //JSON
 
             }
             reader.readAsText(fileUpload.files[0]);
@@ -80,13 +75,78 @@ function Upload() {
             alert("This browser does not support HTML5.");
         }
     } else {
-        alert("Please upload a valid CSV file.");
+        alert("Please upload a valid detect CSV file.");
     }
 }
+function uploadLearn() {
+    learnCSV = []; // emptying the array for next use
+    let learnUpload = document.getElementById("learnUpload");
+    let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test(learnUpload.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                console.log(e);
+                let lines=e.target.result.split('\n');
+                for(let i = 0; i<lines.length; i++){
+                    lines[i] = lines[i].replace(/\s/,'')//delete all blanks
+                }
 
+                let headers=lines[0].split(",");
+
+                for(let i=0;i<headers.length;i++){
+
+                    let obj = {};
+                    let currentColumn = [];
+
+                    for(let j=1;j<lines.length - 1;j++){
+                        let currentline=lines[j].split(",");
+                        currentColumn.push(currentline[i]);
+
+                    }
+                    obj[headers[i]] = currentColumn;
+                    learnCSV.push(obj);
+
+                }
+
+                console.log(learnCSV);
+                console.log('call set keys')
+                setKeys();
+
+                console.log("After learn JSON Conversion");
+                console.log(learnCSV);
+                console.log(JSON.stringify(learnCSV));
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(learnCSV)
+                };
+                if(document.getElementById('regression').checked){
+                    const response = fetch('/learn?model_type=regression', options);
+                    alert(response);
+                } else if (document.getElementById('hybrid').checked) {
+                    const response = fetch('/learn?model_type=hybrid', options);
+                    alert(response.json());
+                }
+
+                //uploadDetect();
+
+                return JSON.stringify(learnCSV); //JSON
+
+            }
+            reader.readAsText(learnUpload.files[0]);
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid learn CSV file.");
+    }
+}
 function changeColor (string) {
     let i;
-    for(i = 0; i < result.length; i++) {
+    for(i = 0; i < learnCSV.length; i++) {
         if(document.getElementById(string) === document.getElementById('feat' + i)){
             document.getElementById(string).style.background = "yellow";
         } else {
@@ -99,9 +159,9 @@ function changeColor (string) {
 async function uploadToServer () {
     await Upload();
     //$.post('/detect', JSON.stringify(result));
-    let json = JSON.stringify(result);
-    let result2 = {'a': result};
-    let x = typeof result;
+    let json = JSON.stringify(detectCSV);
+    let result2 = {'a': detectCSV};
+    let x = typeof detectCSV;
     console.log(x);
     let hybrid = true;
     let test = 5;

@@ -17,18 +17,20 @@
 CSV to JSON
 <script type="text/javascript" src="test.js"></script>
 <br>
-<input type="file" id="fileUpload" accept=".csv"/>
-<input type="button" id="upload" value="Upload" onclick="Upload()"/>
+<input type="file" id="learnUpload" accept=".csv"/>
+
+<input type="button" id="lUpload" value="Upload" onclick="uploadLearn()"/>
+
 
 <br>
 <br>
 <!----------->
-<input type="file" id="csvUpload" accept=".csv"/>
-<input type="button" id="upload2" value="Upload" onclick="Upload()"/>
+<input type="file" id="detectUpload" accept=".csv"/>
+<input type="button" id="dUpload" value="Upload" onclick="uploadDetect()"/>
 <br>
 
 <script src="checkbox.js"></script>
-<input type="checkbox" id="regression" onclick="regressionFunc()">
+<input type="checkbox" id="regression" onclick="regressionFunc()" checked="true">
 <label for="regression"> regression detector</label><br>
 <input type="checkbox" id="hybrid" onclick="hybridFunc()">
 <label for="hybrid"> hybrid detector</label><br>

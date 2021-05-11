@@ -9,7 +9,7 @@ async function getData(feature){
     xlabels=[];
     ylabels=[];
     anomalies=[];
-    (Object.values(result[feature])[0]).forEach(val=>{
+    (Object.values(detectCSV[feature])[0]).forEach(val=>{ ////////
         xlabels.push(i);
         ylabels.push(val);
         i++;
@@ -42,7 +42,7 @@ async function showGraph(feature){
         data: {
             datasets: [{
                 type: 'line',
-                label: Object.keys(result[feature]).toString(),
+                label: Object.keys(detectCSV[feature]).toString(),
                 data: ylabels,
                 backgroundColor:'rgba(9,79,208,0.20)',
                 borderColor: 'rgb(9,79,208)',
