@@ -62,6 +62,15 @@ function Upload() {
                 console.log(result);
                 console.log(JSON.stringify(result));
                 //let x = JSON.stringify(result);
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(result)
+                };
+                const response = fetch('/detect', options);
+
 
                 return JSON.stringify(result); //JSON
 
