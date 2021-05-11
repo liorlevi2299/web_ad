@@ -60,9 +60,11 @@ function uploadDetect() {
                     body: JSON.stringify(detectCSV)
                 };
                 console.log("response is:")
-                const response = fetch('/detect', options);
-                const json = response.json();
-                console.log(json);
+                //const response =
+                const response = fetch('/detect', options).then(response => response.json()).then(data => {
+                    console.log(data)
+                })
+                //console.log(json);
 
                 /*if(document.getElementById('regression').checked){
                     const response = fetch('/detect?model_type=regression', options);
