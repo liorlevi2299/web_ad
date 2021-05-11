@@ -24,34 +24,40 @@ app.get("/", (req, res) => {
     res.sendFile("test.html", {root: '../view'})
 
 })
-var anomalyDetect = new anomalyDetector(0.9);
 app.use(express.json({limit: '100mb'}))
-app.post("/learn?model_type=hybrid", function (req, res) {
+app.use(express.json({limit: '100mb'}))
+let anomalyDetect;
+app.post("/learn", function (req, res) {
+    anomalyDetect = new anomalyDetector(0.9);
+    console.log("!!!!!!!!!!!!!!!!!!!!")
     //anomalyDetect.isHybrid = req.query
-    anomalyDetect.isHybrid = true;
-    anomalyDetect.learnNormal(req.body)
-    res.write("The file was uploaded successfully!")
-    res.end()
-})
+    if (req.query.model_type==='hybrid'){
+        anomalyDetect.isHybrid=true;
+    }
 
-app.use(express.json({limit: '100mb'}))
-app.post("/learn?model_type=regression", function (req, res) {
-    //anomalyDetect.isHybrid = req.query
-    anomalyDetect.isHybrid = false;
-    console.log('learn body:')
-    console.log(req.body);
+    if(req.query.model_type==='regression') {
+        anomalyDetect.isHybrid=false;
+    }
     anomalyDetect.learnNormal(req.body)
-    res.write("The file was uploaded successfully!")
+    //res.write("The file was uploaded successfully!")
+    //alert("the file was upload")
     res.json({
         status: "The file was uploaded successfully!"
     });
+/*    while (true){
+        if (anomalyDetect.status === true) {
+
+        }
+    }*/
     res.end()
 })
 
 app.post("/detect", function (req, res) {
-    console.log('detect body:')
-    console.log(req.body);
+   // console.log('detect body:')
+    //console.log(req.body);
     res.write(JSON.stringify(anomalyDetect.detect(req.body)));
+    // res.json(({x: anomalyDetect.detect(req.body)}));
+    //console.log(JSON.stringify(anomalyDetect.detect(req.body)))
     res.end()
 })
 app.listen(8080)

@@ -48,9 +48,9 @@ function uploadDetect() {
 
                 }
 
-                console.log(detectCSV);
-                console.log("After detect JSON Conversion");
-                console.log(JSON.stringify(detectCSV));
+                // console.log(detectCSV);
+                // console.log("After detect JSON Conversion");
+                // console.log(JSON.stringify(detectCSV));
 
                 const options = {
                     method: 'POST',
@@ -59,7 +59,11 @@ function uploadDetect() {
                     },
                     body: JSON.stringify(detectCSV)
                 };
+                console.log("response is:")
                 const response = fetch('/detect', options);
+                const json = response.json();
+                console.log(json);
+
                 /*if(document.getElementById('regression').checked){
                     const response = fetch('/detect?model_type=regression', options);
                 } else if (document.getElementById('hybrid').checked) {
@@ -78,7 +82,7 @@ function uploadDetect() {
         alert("Please upload a valid detect CSV file.");
     }
 }
-function uploadLearn() {
+async function uploadLearn() {
     learnCSV = []; // emptying the array for next use
     let learnUpload = document.getElementById("learnUpload");
     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
@@ -109,13 +113,13 @@ function uploadLearn() {
 
                 }
 
-                console.log(learnCSV);
-                console.log('call set keys')
+                // console.log(learnCSV);
+                // console.log('call set keys')
                 setKeys();
 
-                console.log("After learn JSON Conversion");
-                console.log(learnCSV);
-                console.log(JSON.stringify(learnCSV));
+                // console.log("After learn JSON Conversion");
+                // console.log(learnCSV);
+                // console.log(JSON.stringify(learnCSV));
                 const options = {
                     method: 'POST',
                     headers: {
@@ -124,14 +128,32 @@ function uploadLearn() {
                     body: JSON.stringify(learnCSV)
                 };
                 if(document.getElementById('regression').checked){
+
+                   /* var url = new URL("/learn"),
+                        params = {model_type: 'hybrid'}
+                    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+                    const response = fetch(url, options).then()
+*/
+
                     const response = fetch('/learn?model_type=regression', options);
                     alert(response);
                 } else if (document.getElementById('hybrid').checked) {
-                    const response = fetch('/learn?model_type=hybrid', options);
-                    alert(response.json());
+/*                    const response = fetch('/learn?model_type=hybrid', options).then((response) => response.blob())
+                        .then(data => {
+                            return data;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });*/
+                    const response = fetch('/learn?model_type=hybrid', options).then(val=>{
+                        alert("the file was upload");
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+
                 }
 
-                //uploadDetect();
+                uploadDetect();
 
                 return JSON.stringify(learnCSV); //JSON
 

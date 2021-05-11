@@ -11,12 +11,14 @@ class anomalyDetector {
     cf;
     thresholdCorr;
     regress_AD;
+    status;
     mult_thresh;
     constructor(th) {
         this.cf = [];
         this.thresholdCorr = th;
         this.regress_AD = new anomalyFunc();
         this.mult_thresh = 1;
+        this.status = false;
     }
     toPoints(arr_x, arr_y){
         let ps = [];
@@ -96,6 +98,7 @@ class anomalyDetector {
                 }
             }
         }
+        this.status = true;
     }
     detect(dataTest){
         let anomalies = [];
