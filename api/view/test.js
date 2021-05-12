@@ -59,7 +59,7 @@ function uploadDetect() {
                     },
                     body: JSON.stringify(detectCSV)
                 };
-                //anomaliesList.clear();
+                anomaliesList.clear();
                 const response = await fetch('/detect', options).then(response => response.json()).then(data => {
                     Object.keys(data).forEach(anomaly=>{
                         let feature = Object.keys(data[anomaly]).toString();
