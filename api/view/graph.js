@@ -1,7 +1,6 @@
 let xlabels=[];
 let ylabels=[];
-let anomalies=[{x: 15, y:1},{x: 16, y:1},{x: 17, y:1},{x: 18, y:1},{x: 110, y:5},{x: 111, y:5},
-    {x: 112, y:5},{x: 113, y:5},{x: 114, y:5},{x: 115, y:5}];
+let anomalies=[];
 
 async function getData(feature){
 
@@ -14,16 +13,25 @@ async function getData(feature){
         ylabels.push(val);
         i++;
     });
-    console.log(ylabels);
 
-    /*    if (jsonAnomalies!=null){
-    (Object.values(jsonAnomalies[feature])[0]).forEach(val=>{
+    let lines = []
+    if (anomaliesList!=null){
+        if (anomaliesList.has(Object.keys(detectCSV[feature]).toString())){
+            lines = anomaliesList.get(Object.keys(detectCSV[feature]).toString())
+        }
+    }
+    console.log(lines)
+
+    lines.forEach(num=>{
         let point ={
-            x: val,
-            y: ((result[feature])[0])[val]
+            x: num,
+            y: ((Object.values(detectCSV[feature])[0])[num])
         }
         anomalies.push(point);
-    });*/
+    });
+/*        (Object.values(anomaliesList[feature])[0]).forEach(val=>{
+
+        });*/
 
 }
 
@@ -32,8 +40,6 @@ async function showGraph(feature){
     let newCanvas = document.createElement("canvas");
     newCanvas.id = "canvas"
     document.getElementById("canvasDev").append(newCanvas);
-    console.log("anomalies");
-    console.log(anomalies);
     await getData(feature).catch(err=>{
         console.error(err);
     });
@@ -47,7 +53,7 @@ async function showGraph(feature){
                 backgroundColor:'rgba(9,79,208,0.20)',
                 borderColor: 'rgb(9,79,208)',
                 borderWidth: 0.1,
-                pointRadius: 0.7,
+                pointRadius: 1,
             }, {
                 type: 'scatter',
                 label: 'anomalies',
@@ -55,7 +61,7 @@ async function showGraph(feature){
                 backgroundColor:'rgb(208,9,9)',
                 borderColor: 'rgb(208,9,9)',
                 borderWidth: 0.1,
-                pointRadius: 0.7,
+                pointRadius: 1.5,
             }],
             labels: xlabels
         },

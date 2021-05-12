@@ -1,6 +1,6 @@
 let detectCSV = [];
 let learnCSV = [];
-
+let anomaliesList = new Map();
 
 function setKeys() {
     const keys = Object.keys(learnCSV);
@@ -24,7 +24,7 @@ function uploadDetect() {
     if (regex.test(fileUpload.value.toLowerCase())) {
         if (typeof (FileReader) != "undefined") {
             let reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = async function (e) {
                 console.log(e);
                 let lines=e.target.result.split('\n');
                 for(let i = 0; i<lines.length; i++){
@@ -61,9 +61,27 @@ function uploadDetect() {
                 };
                 console.log("response is:")
                 //const response =
-                const response = fetch('/detect', options).then(response => response.json()).then(data => {
-                    console.log(data)
+                const response = await fetch('/detect', options).then(response => response.json()).then(data => {
+                    Object.keys(data).forEach(anomaly=>{
+                        let feature = Object.keys(data[anomaly]).toString();
+                        // for(let i = 0 ; i < data.)
+                        // console.log("size:" + data.size)
+                        Object.values(data[anomaly]).forEach(value => {
+                            anomaliesList.set(feature, value);
+                            console.log(anomaliesList.size);
+                        });
+                        console.log(anomaliesList.size);
+
+                    });
+                    console.log(anomaliesList.size);
+
                 })
+                console.log(anomaliesList.size);
+                console.log(anomaliesList);
+
+                console.log("5555555555555555555555555")
+                console.log(anomaliesList.entries());
+
                 //console.log(json);
 
                 /*if(document.getElementById('regression').checked){
@@ -72,6 +90,7 @@ function uploadDetect() {
                     const response = fetch('/detect?model_type=hybrid', options);
                 }*/
 
+                await updateTable();//////////////////////////////////////////////////////////
 
                 return JSON.stringify(detectCSV); //JSON
 
@@ -137,7 +156,11 @@ async function uploadLearn() {
                     const response = fetch(url, options).then()
 */
 
-                    const response = fetch('/learn?model_type=regression', options);
+                    const response = fetch('/learn?model_type=regression', options).then(val=>{
+                        alert("the file was upload");
+                    }).catch(err=>{
+                        console.log(err);
+                    });
                     alert(response);
                 } else if (document.getElementById('hybrid').checked) {
 /*                    const response = fetch('/learn?model_type=hybrid', options).then((response) => response.blob())
@@ -156,7 +179,6 @@ async function uploadLearn() {
                 }
 
                 uploadDetect();
-
                 return JSON.stringify(learnCSV); //JSON
 
             }
