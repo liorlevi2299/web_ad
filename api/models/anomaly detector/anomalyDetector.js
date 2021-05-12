@@ -105,8 +105,8 @@ class anomalyDetector {
         let cf_len = this.cf.length;
         for (let i = 0; i < cf_len; i++) {
             let name = this.cf[i].feature;
-            let arr_x = dataTest[this.find_key(this.cf[i].feature, dataTest)];
-            let arr_y = dataTest[this.find_key(this.cf[i].featureCorr, dataTest)];
+            let arr_x = dataTest[this.find_key_feature(this.cf[i].feature, dataTest)];
+            let arr_y = dataTest[this.find_key_featureCorr(this.cf[i].featureCorr, dataTest)];
             //let len_arr = arr_x.length;
             let arr_xx = Object.values(arr_x)[0];
             let numRow = arr_xx.length;
@@ -130,10 +130,18 @@ class anomalyDetector {
         }
         return anomalies;
     }
-    find_key(key_feature, dataTest) {
+    find_key_feature(key_feature, dataTest) {
         let len = dataTest.length;
         for (let i = 0; i < len; i++) {
             if (this.cf[i].feature === key_feature ){
+                return i;
+            }
+        }
+    }
+    find_key_featureCorr(key_feature, dataTest) {
+        let len = dataTest.length;
+        for (let i = 0; i < len; i++) {
+            if (this.cf[i].featureCorr === key_feature ){
                 return i;
             }
         }
