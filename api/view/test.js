@@ -59,8 +59,7 @@ function uploadDetect() {
                     },
                     body: JSON.stringify(detectCSV)
                 };
-                console.log("response is:")
-                //const response =
+                //anomaliesList.clear();
                 const response = await fetch('/detect', options).then(response => response.json()).then(data => {
                     Object.keys(data).forEach(anomaly=>{
                         let feature = Object.keys(data[anomaly]).toString();
@@ -68,19 +67,12 @@ function uploadDetect() {
                         // console.log("size:" + data.size)
                         Object.values(data[anomaly]).forEach(value => {
                             anomaliesList.set(feature, value);
-                            console.log(anomaliesList.size);
                         });
-                        console.log(anomaliesList.size);
 
                     });
-                    console.log(anomaliesList.size);
 
                 })
-                console.log(anomaliesList.size);
-                console.log(anomaliesList);
 
-                console.log("5555555555555555555555555")
-                console.log(anomaliesList.entries());
 
                 //console.log(json);
 
@@ -90,7 +82,7 @@ function uploadDetect() {
                     const response = fetch('/detect?model_type=hybrid', options);
                 }*/
 
-                await updateTable();//////////////////////////////////////////////////////////
+                await updateTable();
 
                 return JSON.stringify(detectCSV); //JSON
 
@@ -161,7 +153,6 @@ async function uploadLearn() {
                     }).catch(err=>{
                         console.log(err);
                     });
-                    alert(response);
                 } else if (document.getElementById('hybrid').checked) {
 /*                    const response = fetch('/learn?model_type=hybrid', options).then((response) => response.blob())
                         .then(data => {

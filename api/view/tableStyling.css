@@ -2,6 +2,7 @@ table{
     font-size: 20px;
     /*width: 100px;*/
     /*border: 1px solid black;*/
+
 }
 
 th{
@@ -10,10 +11,13 @@ th{
 
 td{
     height: 100px;
+    word-wrap: break-word;
 }
 
 table, th, td{
     border: 2px solid black;
-    width: 500px;
-    max-width: 500px;
+    /*width: 500px;*/
+    /*max-width: 500px;*/
+    table-layout: fixed;
+    width: 100%
 }

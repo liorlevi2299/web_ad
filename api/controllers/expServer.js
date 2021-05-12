@@ -29,7 +29,6 @@ app.use(express.json({limit: '100mb'}))
 let anomalyDetect;
 app.post("/learn", function (req, res) {
     anomalyDetect = new anomalyDetector(0.9);
-    console.log("!!!!!!!!!!!!!!!!!!!!")
     //anomalyDetect.isHybrid = req.query
     if (req.query.model_type==='hybrid'){
         anomalyDetect.isHybrid=true;
