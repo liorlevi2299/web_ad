@@ -3,59 +3,66 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CSV to JSON</title>
+    <title>Anomaly Detector</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="test.css">
     <link rel="stylesheet" href="tableStyling.css">
+    <link rel="stylesheet" href="mainStyle.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
 
     <!-- <script src="convert.js"></script> -->
 </head>
-<body style="text-align:center">
-
-<table id="anomaliesTable">
-<!--    <tr>
-        <th>Feature:</th>
-        <th>Anomaly time:</th>
-    </tr>
-    <tr>
-
-    </tr>-->
-</table>
-<canvas id="tableCanvas"></canvas>
-<script src="anomaliesTable.js"></script>
+<body class="background">
+<div >
+    <br>
+    <h1 class="head">Welcome to the anomaly detection server!</h1>
 
 
-<p style="font-size: 100px  " name="airplane">✈️</p>
-CSV to JSON
-<script type="text/javascript" src="test.js"></script>
-<br>
-<input type="file" id="learnUpload" accept=".csv"/>
+    <div class="buttons">
+        <p class="learnButton"> Please upload train csv file: </p>
+        <input type="file" id="learnUpload" accept=".csv" class="learnB"/>
+        <br>
+        <br>
+        <p class="detectButton"> Please upload csv file to check: </p>
+        <input type="file" id="detectUpload" accept=".csv" class="detectB"/>
+        <br>
+        <br>
 
-<!--<input type="button" id="lUpload" value="Upload" onclick="uploadLearn()"/>-->
+        <script src="checkbox.js"></script>
+
+        <input type="checkbox" id="regression" onclick="regressionFunc()" checked="true">
+        <label for="regression" class="regLabel"> regression detector</label><br>
+        <input type="checkbox" id="hybrid" onclick="hybridFunc()">
+        <label for="hybrid" class="hybLabel"> hybrid detector</label><br>
+        <br>
+
+        <input type="button" id="dUpload" class="upload" value="Upload" onclick="uploadLearn()"/>
+
+    </div>
+
+    <table id="anomaliesTable" class="anomaliesTable">
+
+    </table>
+    <canvas id="tableCanvas"></canvas>
+    <script src="anomaliesTable.js"></script>
 
 
-<br>
-<br>
-<!----------->
-<input type="file" id="detectUpload" accept=".csv"/>
-<input type="button" id="dUpload" value="Upload" onclick="uploadLearn()"/>
-<br>
+<!--    <p style="font-size: 100px  " name="airplane">✈️</p>-->
+    <script type="text/javascript" src="test.js"></script>
 
-<script src="checkbox.js"></script>
-<input type="checkbox" id="regression" onclick="regressionFunc()" >
-<label for="regression"> regression detector</label><br>
-<input type="checkbox" id="hybrid" onclick="hybridFunc()" checked="true">
-<label for="hybrid"> hybrid detector</label><br>
-<!----------->
-<ol id="featuresList">
+    <br>
+    <ol id="featuresList">
 
-</ol>
-<dev id="canvasDev" >
-    <canvas id="canvas" ></canvas>
-</dev>
-<script src="graph.js"></script>
+    </ol>
 
+
+    <div id="canvasDev" class="chart-container" style="position: relative; height:40vh; width:80vw" >
+        <canvas id="canvas" class="graphCanvas"></canvas>
+    </div>
+
+
+    <script src="graph.js"></script>
+</div>
 </body>
 </html>
 

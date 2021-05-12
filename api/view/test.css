@@ -1,8 +1,12 @@
 
 ol {
-    width: 200px;
-    height: 180px;
+    position: absolute;
+    top: 13cm;
+    right: 2cm;
+    width: 230px;
+    height: 400px;
     overflow-y: auto;
+    font-family: "Lucida Handwriting", cursive;
 }
 
 ol li {
@@ -19,7 +23,6 @@ ol li:hover {
 }
 
 ol li:active {
-    background-color: yellow;
+    background-color: #8A2BE2EF;
     color: black;
-
 }

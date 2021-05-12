@@ -1,12 +1,14 @@
+/*
 table{
     font-size: 20px;
-    /*width: 100px;*/
-    /*border: 1px solid black;*/
+    !*width: 100px;*!
+    !*border: 1px solid black;*!
 
 }
 
 th{
     text-align: left;
+    color: #2bd3e2;
 }
 
 td{
@@ -16,8 +18,8 @@ td{
 
 table, th, td{
     border: 2px solid black;
-    /*width: 500px;*/
-    /*max-width: 500px;*/
+    !*width: 500px;*!
+    !*max-width: 500px;*!
     table-layout: fixed;
     width: 100%
-}
+}*/

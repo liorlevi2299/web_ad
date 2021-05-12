@@ -83,6 +83,7 @@ function uploadDetect() {
                 }*/
 
                 await updateTable();
+                document.getElementById('feat0').click();
 
                 return JSON.stringify(detectCSV); //JSON
 
@@ -185,7 +186,7 @@ function changeColor (string) {
     let i;
     for(i = 0; i < learnCSV.length; i++) {
         if(document.getElementById(string) === document.getElementById('feat' + i)){
-            document.getElementById(string).style.background = "yellow";
+            document.getElementById(string).style.background = "#8A2BE2EF";
         } else {
             document.getElementById('feat' + i).style.background = "#eee";
         }

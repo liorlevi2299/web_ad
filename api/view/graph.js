@@ -50,10 +50,10 @@ async function showGraph(feature){
                 type: 'line',
                 label: Object.keys(detectCSV[feature]).toString(),
                 data: ylabels,
-                backgroundColor:'rgba(9,79,208,0.20)',
-                borderColor: 'rgb(9,79,208)',
+                backgroundColor: "#8A2BE2EF",
+                borderColor: "#8A2BE2EF",
                 borderWidth: 0.1,
-                pointRadius: 1,
+                pointRadius: 1.3,
             }, {
                 type: 'scatter',
                 label: 'anomalies',
@@ -61,7 +61,7 @@ async function showGraph(feature){
                 backgroundColor:'rgb(208,9,9)',
                 borderColor: 'rgb(208,9,9)',
                 borderWidth: 0.1,
-                pointRadius: 1.5,
+                pointRadius: 1.9,
             }],
             labels: xlabels
         },
@@ -78,7 +78,11 @@ async function showGraph(feature){
             }
         }
     });
-
+    myChart.canvas.parentNode.style.height = '400px';
+    myChart.canvas.parentNode.style.width = '78%';
+    myChart.canvas.parentNode.style.position = 'absolute'
+    myChart.canvas.parentNode.style.top = '12cm';
+    myChart.canvas.parentNode.style.padding = '8px';
 }
 
 

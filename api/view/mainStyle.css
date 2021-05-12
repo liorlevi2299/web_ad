@@ -1,0 +1,72 @@
+/*.head{
+    color: rgba(138, 43, 226, 0.94);
+    font-size: 70px;
+    font-family: "Lucida Handwriting", cursive;
+}*/
+.head{
+    position: absolute;
+    color: rgba(138, 43, 226, 0.94);
+    font-size: 70px;
+    font-family: "Ink Free", cursive;
+    padding: 20px;
+}
+
+.background{
+    position: relative;
+    background-color: rgba(173, 152, 200, 0.22);
+    height: 100%;
+    width: 100%;
+}
+
+.buttons{
+   ;
+    padding: 8px;
+    border: 2px solid rgba(138, 43, 226, 0.94);
+    position: absolute;
+    top: 3cm;
+    right: 2cm;
+}
+
+.learnButton{
+    font-size: 20px;
+    color: rgba(79, 11, 144, 0.7);
+
+}
+.detectButton{
+    font-size: 20px;
+    color: rgba(79, 11, 144, 0.88);
+
+}
+
+.regLabel, .hybLabel{
+    font-size: 20px;
+    color: rgb(79, 11, 144);
+}
+
+.upload{
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+}
+
+.learnB, .detectB{
+    height: 40px;
+    width: 250px;
+    font-size: 18px;
+}
+
+.anomaliesTable{
+    position: absolute;
+    top: 5cm;
+}
+
+/*.graphCanvas{
+    top: 26cm;
+    right: 1cm;
+}*/
+
+.r{
+    border: 2px solid black;
+    position: static;
+    right: 10%;
+}
