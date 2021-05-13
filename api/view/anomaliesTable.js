@@ -2,7 +2,6 @@ let isFirstTime = true
 let numOfRows = 0
 
 function updateTable(){
-    let color = '#e22bc7'
     let myTable = document.getElementById("anomaliesTable")
 
     myTable.style.width = "70%"
@@ -16,19 +15,19 @@ function updateTable(){
     myTable.style.overflowY = 'auto'
 
     if(isFirstTime){
-        let header = myTable.createTHead();
-        let firstRow = header.insertRow(0);
-        let cell11 = firstRow.insertCell(0)
-        let cell12 = firstRow.insertCell(1)
+        let header = mytable.createthead();
+        let firstrow = header.insertrow(0);
+        let cell11 = firstrow.insertcell(0)
+        let cell12 = firstrow.insertcell(1)
 
-        cell11.innerHTML = "Feature:"
-        cell12.innerHTML = "Anomalies:"
-        cell12.style.borderSpacing = "0.3px";
-        cell11.style.borderSpacing = "0.3px";
-        cell11.style.fontStyle = "oblique";
-        cell12.style.fontStyle = "oblique";
-        cell12.style.fontWeight = "bold";
-        cell11.style.fontWeight = "bold";
+        cell11.innerhtml = "feature:"
+        cell12.innerhtml = "anomalies:"
+        cell12.style.borderspacing = "0.3px";
+        cell11.style.borderspacing = "0.3px";
+        cell11.style.fontstyle = "oblique";
+        cell12.style.fontstyle = "oblique";
+        cell12.style.fontweight = "bold";
+        cell11.style.fontweight = "bold";
 
 
         cell12.style.color = "#6d40ce"
@@ -36,7 +35,7 @@ function updateTable(){
         cell11.style.border = "2px solid #6d40ce"
         cell12.style.border = "2px solid #6d40ce"
 
-        isFirstTime = false
+        isfirsttime = false
     } else { // not the first time: we need to delete all the former information
         for (let i = 0; i<numOfRows; i++){
             myTable.deleteRow(1);
