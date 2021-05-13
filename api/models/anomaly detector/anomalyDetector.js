@@ -39,7 +39,6 @@ class anomalyDetector {
         return max;
     }
     learnNormal(dataTrain){
-        //let x = dataTrain[14].
         let len = dataTrain.length;
         let corrFeatures = []
 

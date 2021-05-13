@@ -48,10 +48,6 @@ function uploadDetect() {
 
                 }
 
-                // console.log(detectCSV);
-                // console.log("After detect JSON Conversion");
-                // console.log(JSON.stringify(detectCSV));
-
                 const options = {
                     method: 'POST',
                     headers: {
@@ -63,8 +59,6 @@ function uploadDetect() {
                 const response = await fetch('/detect', options).then(response => response.json()).then(data => {
                     Object.keys(data).forEach(anomaly=>{
                         let feature = Object.keys(data[anomaly]).toString();
-                        // for(let i = 0 ; i < data.)
-                        // console.log("size:" + data.size)
                         Object.values(data[anomaly]).forEach(value => {
                             anomaliesList.set(feature, value);
                         });
@@ -72,15 +66,6 @@ function uploadDetect() {
                     });
 
                 })
-
-
-                //console.log(json);
-
-                /*if(document.getElementById('regression').checked){
-                    const response = fetch('/detect?model_type=regression', options);
-                } else if (document.getElementById('hybrid').checked) {
-                    const response = fetch('/detect?model_type=hybrid', options);
-                }*/
 
                 await updateTable();
                 document.getElementById('feat0').click();
@@ -127,13 +112,8 @@ async function uploadLearn() {
 
                 }
 
-                // console.log(learnCSV);
-                // console.log('call set keys')
                 setKeys();
 
-                // console.log("After learn JSON Conversion");
-                // console.log(learnCSV);
-                // console.log(JSON.stringify(learnCSV));
                 const options = {
                     method: 'POST',
                     headers: {
@@ -155,13 +135,6 @@ async function uploadLearn() {
                         console.log(err);
                     });
                 } else if (document.getElementById('hybrid').checked) {
-/*                    const response = fetch('/learn?model_type=hybrid', options).then((response) => response.blob())
-                        .then(data => {
-                            return data;
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });*/
                     const response = fetch('/learn?model_type=hybrid', options).then(val=>{
                         alert("the file was upload");
                     }).catch(err=>{
@@ -196,11 +169,9 @@ function changeColor (string) {
 
 async function uploadToServer () {
     await Upload();
-    //$.post('/detect', JSON.stringify(result));
     let json = JSON.stringify(detectCSV);
     let result2 = {'a': detectCSV};
     let x = typeof detectCSV;
-    console.log(x);
     let hybrid = true;
     let test = 5;
     const data = {hybrid,test }
@@ -215,11 +186,5 @@ async function uploadToServer () {
     };
     const response = await fetch('/detect', options);
     const data1 = await response.json();
-    console.log(data1);
-    /*fetch('/detect', options).then(res => {
-        console.log(res);
-    }).catch(res => {
-        console.log(res);
-    });*/
 
 }

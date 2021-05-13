@@ -43,6 +43,7 @@ async function showGraph(feature){
     let myChart = new Chart(ctx, {
         data: {
             datasets: [{
+                // the line of data
                 type: 'line',
                 label: Object.keys(detectCSV[feature]).toString(),
                 data: ylabels,
@@ -53,6 +54,7 @@ async function showGraph(feature){
                 order: 2
 
             }, {
+                // the points of anomalies:
                 type: 'scatter',
                 label: 'anomalies',
                 data:anomalies,
@@ -75,6 +77,8 @@ async function showGraph(feature){
             }
         }
     });
+
+    //design:
     myChart.canvas.parentNode.style.height = '53vh';
     myChart.canvas.parentNode.style.width = '70vw';
     myChart.canvas.parentNode.style.position = 'relative'

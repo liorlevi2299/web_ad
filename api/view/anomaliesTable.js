@@ -4,6 +4,7 @@ let numOfRows = 0
 function updateTable(){
     let myTable = document.getElementById("anomaliesTable")
 
+    // design:
     myTable.style.width = "70vw"
     myTable.style.border = "2px solid rgba(138, 43, 226, 0.94)"
     myTable.style.borderCollapse = "collapse"
@@ -14,7 +15,7 @@ function updateTable(){
     myTable.style.top = '5cm';
     myTable.style.overflowY = 'auto'
 
-    if(isFirstTime){
+    if(isFirstTime){ // in the first time create the header
         let header = myTable.createTHead();
         let firstRow = header.insertRow(0);
         let cell11 = firstRow.insertCell(0)
@@ -28,8 +29,6 @@ function updateTable(){
         cell12.style.fontStyle = "oblique";
         cell12.style.fontWeight = "bold";
         cell11.style.fontWeight = "bold";
-
-
         cell12.style.color = "rgba(138, 43, 226, 0.94)"
         cell11.style.color = "rgba(138, 43, 226, 0.94)"
         cell11.style.border = "2px solid rgba(138, 43, 226, 0.94)"
@@ -44,11 +43,10 @@ function updateTable(){
 
 
     let i = 1;
-    numOfRows = 0;
+    numOfRows = 0; // save the numbers of rows, so we know how many to delete next time
     anomaliesList.forEach((value, key) => {
         let tableData = document.getElementById("anomaliesTable");
         let row = tableData.insertRow(i);
-
 
         i++;
         let cell1 = row.insertCell(0);
