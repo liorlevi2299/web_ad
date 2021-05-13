@@ -75,11 +75,15 @@ async function showGraph(feature){
             }
         }
     });
-    myChart.canvas.parentNode.style.height = '400px';
-    myChart.canvas.parentNode.style.width = '700px';
-    myChart.canvas.parentNode.style.position = 'absolute'
-    myChart.canvas.parentNode.style.top = '13cm';
+    myChart.canvas.parentNode.style.height = '53vh';
+    myChart.canvas.parentNode.style.width = '70vw';
+    myChart.canvas.parentNode.style.position = 'relative'
+    myChart.canvas.parentNode.style.top = '4.9vh';
     myChart.canvas.parentNode.style.padding = '8px';
+    myChart.canvas.parentNode.style.border = '0.3vw double rgba(138, 43, 226, 0.94)';
+    myChart.canvas.parentNode.style.marginLeft = '5px';
+    myChart.canvas.parentNode.style.borderRadius = '5px';
+
 }
 
 
