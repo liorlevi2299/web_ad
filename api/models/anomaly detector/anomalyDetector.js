@@ -73,7 +73,7 @@ class anomalyDetector {
 
             let ps = this.toPoints(arr_i, arr_corr);
 
-            //the regression
+        //the regression
             if (max > this.thresholdCorr){
                 let c = new CorrFeatures();
                 c.feature = f1;
@@ -125,8 +125,8 @@ class anomalyDetector {
 
                 if(this.isAnomalous(xx_j,yy_j, this.cf[i])){
                     //let d = this.cf[i].feature;
-                    /*                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
-                                        anomalies.push(new AnomalyReport(d,(j+1)));*/
+/*                    let d = this.cf[i].feature + "-" + this.cf[i].featureCorr;
+                    anomalies.push(new AnomalyReport(d,(j+1)));*/
                     list_anomalies.push(j+1);
                 }
             }
@@ -145,14 +145,14 @@ class anomalyDetector {
             }
         }
     }
-    /*    find_key_featureCorr(key_feature, featureList) {
-            let len = featureList.length;
-            for (let i = 0; i < len; i++) {
-                if (this.cf[i].feature === key_feature ){
-                    return i;
-                }
+/*    find_key_featureCorr(key_feature, featureList) {
+        let len = featureList.length;
+        for (let i = 0; i < len; i++) {
+            if (this.cf[i].feature === key_feature ){
+                return i;
             }
-        }*/
+        }
+    }*/
 
     dist(p1, p2) {
         let a = Math.abs(p1.x - p2.x);
