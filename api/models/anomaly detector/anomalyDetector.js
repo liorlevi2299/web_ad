@@ -74,23 +74,23 @@ class anomalyDetector {
             let ps = this.toPoints(arr_i, arr_corr);
 
         //the regression
-            if (p > this.thresholdCorr){
+            if (max > this.thresholdCorr){
                 let c = new CorrFeatures();
                 c.feature = f1;
                 c.featureCorr = f2;
-                c.correlation = p;
+                c.correlation = max;
                 c.line_reg = this.regress_AD.linear_reg(ps, numRows)
                 c.threshold = this.findThreshold(ps, len, c.line_reg) * this.mult_thresh;
                 this.cf.push(c);
             }
             //hybrid anomaly detector
             else if (this.isHybrid === true) {
-                if (p > 0.5) {
+                if (max > 0.5) {
                     let minCircle = new enclosingCircle(ps);
                     let c = new CorrFeatures();
                     c.feature = f1;
                     c.featureCorr = f2;
-                    c.correlation = p;
+                    c.correlation = max;
                     c.threshold = minCircle.r * this.mult_thresh;
                     c.cx = minCircle.x;
                     c.cy = minCircle.y;
@@ -102,12 +102,19 @@ class anomalyDetector {
     }
     detect(dataTest){
         let anomalies = [];
+        let feature_list = [];
+        let feature_k = Object.keys(dataTest);
+        for (let k = 0; k < dataTest.length; k++) {
+            feature_k[k] = Object.keys(dataTest[k])
+            feature_list[k] = feature_k[k][0];
+        }
         let cf_len = this.cf.length;
         for (let i = 0; i < cf_len; i++) {
             let name = this.cf[i].feature;
-            let arr_x = dataTest[this.find_key_feature(this.cf[i].feature, dataTest)];
-            let arr_y = dataTest[this.find_key_featureCorr(this.cf[i].featureCorr, dataTest)];
-            //let len_arr = arr_x.length;
+            let i_feature = this.find_key_feature(this.cf[i].feature, feature_list);
+            let i_featureCorr = this.find_key_feature(this.cf[i].featureCorr, feature_list);
+            let arr_x = dataTest[i_feature];
+            let arr_y = dataTest[i_featureCorr];
             let arr_xx = Object.values(arr_x)[0];
             let numRow = arr_xx.length;
             let arr_yy = Object.values(arr_y)[0];
@@ -130,38 +137,42 @@ class anomalyDetector {
         }
         return anomalies;
     }
-    find_key_feature(key_feature, dataTest) {
-        let len = dataTest.length;
+    find_key_feature(key_feature, featureList) {
+        let len = featureList.length;
+        for (let i = 0; i < len; i++) {
+            if (featureList[i] === key_feature ){
+                return i;
+            }
+        }
+    }
+/*    find_key_featureCorr(key_feature, featureList) {
+        let len = featureList.length;
         for (let i = 0; i < len; i++) {
             if (this.cf[i].feature === key_feature ){
                 return i;
             }
         }
-    }
-    find_key_featureCorr(key_feature, dataTest) {
-        let len = dataTest.length;
-        for (let i = 0; i < len; i++) {
-            if (this.cf[i].featureCorr === key_feature ){
-                return i;
-            }
-        }
-    }
+    }*/
 
     dist(p1, p2) {
-        let a = p1.x - p2.x;
-        let b = p1.y - p2.y;
-
+        let a = Math.abs(p1.x - p2.x);
+        let b = Math.abs(p1.y - p2.y);
         return Math.sqrt( a*a + b*b );
     }
     isAnomalous(x, y, c) {
+        let ret;
+        let dist;
         if (c.correlation > this.thresholdCorr) {
-            let dist = Math.abs(y - c.line_reg.f(x));
-            return (dist > c.threshold);
+            dist = Math.abs(y - c.line_reg.f(x));
+            ret = (dist > c.threshold);
+            return ret;
         }
         else if ((c.correlation> 0.5) && (this.isHybrid)) {
             let p1 = new Point(x, y);
-            let p2 = new Point(c.cx, c.cy)
-            return (Math.abs(this.dist(p1, p2)) > c.threshold);
+            let p2 = new Point(c.cx, c.cy);
+            dist = this.dist(p1, p2)
+            ret = dist > c.threshold;
+            return ret;
         }
     }
 }
