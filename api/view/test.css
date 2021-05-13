@@ -2,11 +2,16 @@
 ol {
     position: absolute;
     top: 13cm;
-    right: 3cm;
-    width: 270px;
+    left: 95%;
+    width: 320px;
     height: 400px;
+    bottom: 50px;
     overflow-y: auto;
     font-family: "Lucida Handwriting", cursive;
+    max-width:70%;
+    min-width:270px;
+    max-height:500px;
+    min-height:21%;
 }
 
 ol li {

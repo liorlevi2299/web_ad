@@ -3,7 +3,9 @@
     font-size: 70px;
     font-family: "Lucida Handwriting", cursive;
 }*/
-.head{
+
+/*original*/
+/*.head{
     position: relative;
     color: rgba(138, 43, 226, 0.94);
     font-size: 70px;
@@ -57,14 +59,14 @@
     height: 40px;
     width: 250px;
     font-size: 18px;
-    /*border-radius: 50px 20px;*/
-    /*border: 2px solid black;*/
+    !*border-radius: 50px 20px;*!
+    !*border: 2px solid black;*!
 }
 
 .anomaliesTable{
     position: absolute;
     top: 5cm;
-}
+}*/
 
 /*.graphCanvas{
     top: 26cm;
@@ -75,4 +77,91 @@
     border: 2px solid black;
     position: static;
     right: 10%;
+}
+
+.head{
+    position: relative;
+    color: rgba(138, 43, 226, 0.94);
+    font-size: 70px;
+    font-family: "Ink Free", cursive;
+    padding: 20px;
+    bottom: 10px;
+    top: -50px;
+    left: 10px;
+    max-width:50%;
+    min-width:800px;
+    max-height:500px;
+    min-height:20%;
+}
+
+.background{
+    position: relative;
+    background-color: rgba(173, 152, 200, 0.22);
+    height: 100%;
+    width: 100%;
+    max-width:70%;
+    min-width:800px;
+    max-height:500px;
+    min-height:21%;
+}
+
+.buttons {;
+    padding: 10px;
+    border: 2px double rgba(138, 43, 226, 0.94);
+    position: relative;
+    top: 80%;
+    left: 100%;
+    bottom: 180px;
+    right: 20%;
+    width: 300px;
+    border-radius: 50px 20px;
+    max-width:70%;
+    min-width:150px;
+    max-height:500px;
+    min-height:21%;
+}
+
+.anomaliesTable {
+    overflow-y: scroll;
+    height:300px;
+    display:inline;
+}
+
+.learnButton{
+    font-size: 20px;
+    color: rgba(79, 11, 144, 0.7);
+
+
+}
+.detectButton{
+    font-size: 20px;
+    color: rgba(79, 11, 144, 0.88);
+
+}
+
+.regLabel, .hybLabel{
+    font-size: 20px;
+    color: rgb(79, 11, 144);
+
+}
+
+.upload{
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+    border-radius: 50px 20px;
+
+}
+
+.learnB, .detectB{
+    height: 40px;
+    width: 250px;
+    font-size: 18px;
+    /*border-radius: 50px 20px;*/
+    /*border: 2px solid black;*/
+}
+
+.anomaliesTable{
+    position: absolute;
+    top: 5cm;
 }
