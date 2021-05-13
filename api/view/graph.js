@@ -76,7 +76,7 @@ async function showGraph(feature){
         }
     });
     myChart.canvas.parentNode.style.height = '400px';
-    myChart.canvas.parentNode.style.width = '78%';
+    myChart.canvas.parentNode.style.width = '700px';
     myChart.canvas.parentNode.style.position = 'absolute'
     myChart.canvas.parentNode.style.top = '13cm';
     myChart.canvas.parentNode.style.padding = '8px';

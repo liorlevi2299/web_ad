@@ -5,12 +5,12 @@ function updateTable(){
     let color = '#e22bc7'
     let myTable = document.getElementById("anomaliesTable")
 
-    myTable.style.width = "70%"
+    myTable.style.width = "700px"
     myTable.style.border = "2px solid #460ecd"
     myTable.style.borderCollapse = "collapse"
     myTable.style.borderSpacing = "0.3px";
     myTable.style.fontSize = "25px"
-    myTable.style.padding = "10px"
+    myTable.style.padding = "1px"
     myTable.style.position = 'absolute'
     myTable.style.top = '5cm';
     myTable.style.overflowY = 'auto'
@@ -64,19 +64,23 @@ function updateTable(){
         cell1.innerHTML = key;
         //cell2.innerHTML = value.toString();
         cell2.innerHTML = '[' + value[0].toString();
-        for(let v = 0; v < value.length; v++) {
-            if(v === value.length - 1 && value[v - 1] + 1 === value[v]) {
-                // last anomaly in array, and the continuation of the last set
-                cell2.innerHTML += '-' + value[v].toString() + ']';
-            } else if(v === value.length - 1) {
-                // last anomaly in array, and a new set
-                cell2.innerHTML += '[' + value[v].toString() + ']';
-            }
-            else if(value[v] + 1 === value[v+1]) {
-                // continue
-            } else {
-                cell2.innerHTML += '-' + value[v].toString() + ']';
-                cell2.innerHTML += ', [' + value[v + 1].toString();
+        if(value.length === 1) {
+            cell2.innerHTML += ']';
+        } else {
+            for(let v = 0; v < value.length; v++) {
+                if(v === value.length - 1 && value[v - 1] + 1 === value[v]) {
+                    // last anomaly in array, and the continuation of the last set
+                    cell2.innerHTML += '-' + value[v].toString() + ']';
+                } else if(v === value.length - 1) {
+                    // last anomaly in array, and a new set
+                    cell2.innerHTML += '[' + value[v].toString() + ']';
+                }
+                else if(value[v] + 1 === value[v+1]) {
+                    // continue
+                } else {
+                    cell2.innerHTML += '-' + value[v].toString() + ']';
+                    cell2.innerHTML += ', [' + value[v + 1].toString();
+                }
             }
         }
         numOfRows++
