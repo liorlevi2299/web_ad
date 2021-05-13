@@ -4,8 +4,7 @@ let anomalies=[];
 
 // copy the data, according to the chosen feature, to 2 arrays: the time array (x), and the data array (y)
 async function getData(feature){
-    let i = 0; // the lines of the file
-    // cleaning the arrays from the last feature:
+    let i = 0;
     xlabels=[];
     ylabels=[];
     anomalies=[];
@@ -15,15 +14,14 @@ async function getData(feature){
         i++;
     });
 
-    // if the feature has anomalies, save the list of anomalies
     let lines = []
     if (anomaliesList!=null){
         if (anomaliesList.has(Object.keys(detectCSV[feature]).toString())){
             lines = anomaliesList.get(Object.keys(detectCSV[feature]).toString())
         }
     }
+    console.log(lines)
 
-    // create a point of the anomaly time and value
     lines.forEach(num=>{
         let point ={
             x: num,
@@ -33,20 +31,14 @@ async function getData(feature){
     });
 }
 
-
-// create the graph
 async function showGraph(feature){
-    // remove the former graph
     document.getElementById("canvas").remove();
     let newCanvas = document.createElement("canvas");
     newCanvas.id = "canvas"
     document.getElementById("canvasDev").append(newCanvas);
-
     await getData(feature).catch(err=>{
         console.error(err);
     });
-
-    // create the graph
     var ctx = document.getElementById('canvas').getContext('2d');
     let myChart = new Chart(ctx, {
         data: {
