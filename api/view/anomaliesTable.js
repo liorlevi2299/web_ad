@@ -7,7 +7,7 @@ function updateTable(){
 
     myTable.style.width = "70%"
     myTable.style.border = "2px solid #460ecd"
-    //myTable.style.borderCollapse = "collapse"
+    myTable.style.borderCollapse = "collapse"
     myTable.style.borderSpacing = "0.3px";
     myTable.style.fontSize = "25px"
     myTable.style.padding = "10px"
@@ -21,14 +21,18 @@ function updateTable(){
         let cell11 = firstRow.insertCell(0)
         let cell12 = firstRow.insertCell(1)
 
-        cell11.innerHTML = "Feature"
-        cell12.innerHTML = "Anomalies"
+        cell11.innerHTML = "Feature:"
+        cell12.innerHTML = "Anomalies:"
         cell12.style.borderSpacing = "0.3px";
         cell11.style.borderSpacing = "0.3px";
+        cell11.style.fontStyle = "oblique";
+        cell12.style.fontStyle = "oblique";
+        cell12.style.fontWeight = "bold";
+        cell11.style.fontWeight = "bold";
 
 
         cell12.style.color = "#6d40ce"
-        cell11.style.color = "#6d40ce"//////////////////////////////////////
+        cell11.style.color = "#6d40ce"
         cell11.style.border = "2px solid #6d40ce"
         cell12.style.border = "2px solid #6d40ce"
 
@@ -51,8 +55,8 @@ function updateTable(){
         let cell1 = row.insertCell(0);
         let cell2 = row.insertCell(1);
 
-        cell1.style.color = "#6d40ce"
-        cell2.style.color = "#6d40ce"
+        cell1.style.color = "#000000"
+        cell2.style.color = "#000000"
 
         cell2.style.border = "2px solid #6d40ce"
         cell1.style.border = "2px solid #6d40ce"

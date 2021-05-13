@@ -18,18 +18,19 @@
     width: 100%;
 }
 
-.buttons{
-   ;
+.buttons {;
     padding: 8px;
-    border: 2px solid rgba(138, 43, 226, 0.94);
+    border: 2px double rgba(138, 43, 226, 0.94);
     position: absolute;
     top: 3cm;
-    right: 2cm;
+    right: 3cm;
+    border-radius: 50px 20px;
 }
 
 .learnButton{
     font-size: 20px;
     color: rgba(79, 11, 144, 0.7);
+
 
 }
 .detectButton{
@@ -41,18 +42,23 @@
 .regLabel, .hybLabel{
     font-size: 20px;
     color: rgb(79, 11, 144);
+
 }
 
 .upload{
     height: 40px;
     width: 80px;
     font-size: 20px;
+    border-radius: 50px 20px;
+
 }
 
 .learnB, .detectB{
     height: 40px;
     width: 250px;
     font-size: 18px;
+    /*border-radius: 50px 20px;*/
+    /*border: 2px solid black;*/
 }
 
 .anomaliesTable{

@@ -2,13 +2,13 @@ let xlabels=[];
 let ylabels=[];
 let anomalies=[];
 
+// copy the data, according to the chosen feature, to 2 arrays: the time array (x), and the data array (y)
 async function getData(feature){
-
     let i = 0;
     xlabels=[];
     ylabels=[];
     anomalies=[];
-    (Object.values(detectCSV[feature])[0]).forEach(val=>{ ////////
+    (Object.values(detectCSV[feature])[0]).forEach(val=>{
         xlabels.push(i);
         ylabels.push(val);
         i++;
@@ -29,10 +29,6 @@ async function getData(feature){
         }
         anomalies.push(point);
     });
-/*        (Object.values(anomaliesList[feature])[0]).forEach(val=>{
-
-        });*/
-
 }
 
 async function showGraph(feature){
@@ -54,20 +50,21 @@ async function showGraph(feature){
                 borderColor: "#8A2BE2EF",
                 borderWidth: 0.1,
                 pointRadius: 1.3,
+                order: 2
+
             }, {
                 type: 'scatter',
                 label: 'anomalies',
                 data:anomalies,
                 backgroundColor:'rgb(208,9,9)',
-                borderColor: 'rgb(208,9,9)',
+                borderColor: 'rgb(94,2,2)',
                 borderWidth: 0.1,
                 pointRadius: 1.9,
+                order: 1
             }],
             labels: xlabels
         },
 
-
-        // backgroundColor: 'rgb(102,205,186)',
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -81,7 +78,7 @@ async function showGraph(feature){
     myChart.canvas.parentNode.style.height = '400px';
     myChart.canvas.parentNode.style.width = '78%';
     myChart.canvas.parentNode.style.position = 'absolute'
-    myChart.canvas.parentNode.style.top = '12cm';
+    myChart.canvas.parentNode.style.top = '13cm';
     myChart.canvas.parentNode.style.padding = '8px';
 }
 
