@@ -4,7 +4,7 @@
     font-family: "Lucida Handwriting", cursive;
 }*/
 .head{
-    position: absolute;
+    position: relative;
     color: rgba(138, 43, 226, 0.94);
     font-size: 70px;
     font-family: "Ink Free", cursive;
