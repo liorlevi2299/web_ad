@@ -52,7 +52,10 @@ Required:
 2. If you already have node.js on your computer - also write in cmd (the command line) 'npm install'.
 2. After downloading the zip of the web app, open the cmd inside the folder of controllers, it will look something like:
  C:\Users\yourUserName\Downloads\web_ad-master\web_ad-master\api\controllers.
-3. In the cmd - run 'npm start'.
+3. In the cmd - run:
+```
+npm start
+```
 4. Open in a browser like google chrome this link - http://localhost:8080/
 5. The web app has launched. you can now enter 2 csv files (train file and check file). You can choose the detector, and if not 
 there will be a default choice.
