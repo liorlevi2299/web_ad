@@ -4,7 +4,11 @@ let anomaliesList = new Map();
 
 function setKeys() {
     const keys = Object.keys(learnCSV);
+
     let list = document.getElementById('featuresList');
+    // removing old children in list from previous uploads of files.
+    while (list.firstChild)
+        list.removeChild(list.firstChild);
     keys.forEach(function(key) {
         let li = document.createElement('li');
         li.innerText = Object.keys(learnCSV[key]).toString();
@@ -19,6 +23,7 @@ function setKeys() {
 
 function uploadDetect() {
     detectCSV = []; // emptying the array for next use
+    detectCSV.length = 0;
     let fileUpload = document.getElementById("detectUpload");
     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
@@ -98,6 +103,7 @@ function uploadDetect() {
 }
 async function uploadLearn() {
     learnCSV = []; // emptying the array for next use
+    learnCSV.length = 0;
     let learnUpload = document.getElementById("learnUpload");
     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(learnUpload.value.toLowerCase())) {
