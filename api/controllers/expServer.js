@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
-app.use(express.static("../web_ad/api/view"))
+app.use(express.static("api/view"))
 //console.log(window.location.path)
 app.get("/", (req, res) => {
-    res.sendFile("test.html", {root: '../web_ad/api/view'})
+    res.sendFile("test.html", {root: 'api/view'})
 
 })
 app.use(express.json({limit: '100mb'}))
