@@ -6,11 +6,9 @@
     <title>Anomaly Detector</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="test.css">
-    <link rel="stylesheet" href="tableStyling.css">
     <link rel="stylesheet" href="mainStyle.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
 
-    <!-- <script src="convert.js"></script> -->
 </head>
 <body class="background">
 <div >
@@ -69,76 +67,4 @@
 </body>
 </html>
 
-
-
-
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CSV to JSON</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  &lt;!&ndash; <script src="convert.js"></script> &ndash;&gt;
-</head>
-<body style="text-align:center">
-CSV to JSON
-<script type`="text/javascript">
-  function Upload() {
-    var fileUpload = document.getElementById("fileUpload");
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test(fileUpload.value.toLowerCase())) {
-      if (typeof (FileReader) != "undefined") {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          /* console.log("Raw File");
-           console.log(e.target.result);*/
-          var lines=e.target.result.split('\n');
-          for(let i = 0; i<lines.length; i++){
-            lines[i] = lines[i].replace(/\s/,'')//delete all blanks
-          }
-          var result = [];
-
-          var headers=lines[0].split(",");
-
-          for(var i=0;i<headers.length;i++){
-
-            var obj = {};
-            /*var currentline=lines[i].split(",");*/
-            var currentColumn = [];
-
-            for(var j=1;j<lines.length - 1;j++){
-              var currentline=lines[j].split(",");
-              currentColumn.push(currentline[i]);
-
-            }
-            obj[headers[i]] = currentColumn;
-            result.push(obj);
-
-          }
-
-          //return result; //JavaScript object
-          /*    console.log("After JSON Conversion");*/
-
-          console.log(JSON.stringify(result));
-
-          return JSON.stringify(result); //JSON
-
-        }
-        reader.readAsText(fileUpload.files[0]);
-      } else {
-        alert("This browser does not support HTML5.");
-      }
-    } else {
-      alert("Please upload a valid CSV file.");
-    }
-  }
-</script>
-<br>
-<br>
-<input type="file" id="fileUpload" />
-<input type="button" id="upload" value="Upload" onclick="Upload()" />
-</body>
-</html>-->
 

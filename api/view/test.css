@@ -9,18 +9,9 @@ ol {
     top: 90vh;
     border: 0.3vw double rgba(138, 43, 226, 0.94);
     border-radius: 10px;
-    /*border-radius: 10px;*/
     overflow-y: auto;
 
     float: left;
-    /*
-        top: 13cm;
-        left: 95%;
-        bottom: 50px;
-        max-width:70%;
-        min-width:270px;
-        max-height:500px;
-        min-height:21%;*/
 }
 
 ol li {
@@ -29,8 +20,6 @@ ol li {
     display: block;
     padding: 12px;
     text-decoration: none;
-    /*width: 17vw;*/
-
 }
 
 ol li:hover {
