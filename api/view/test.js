@@ -142,7 +142,7 @@ async function uploadLearn() {
                     });
                 } else if (document.getElementById('hybrid').checked) {
                     const response = fetch('/learn?model_type=hybrid', options).then(val=>{
-                        alert("the file was upload");
+                        alert("the file was uploaded");
                     }).catch(err=>{
                         console.log(err);
                     });
