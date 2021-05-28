@@ -17,7 +17,6 @@ function setKeys() {
         showGraph(key.toString()).catch(err => {});
         changeColor(li.id)};
         list.appendChild(li);
-        console.log(Object.keys(learnCSV[key]).toString());
     })
 }
 
@@ -95,7 +94,6 @@ async function uploadLearn() {
         if (typeof (FileReader) != "undefined") {
             let reader = new FileReader();
             reader.onload = function (e) {
-                console.log(e);
                 let lines=e.target.result.split('\n');
                 for(let i = 0; i<lines.length; i++){
                     lines[i] = lines[i].replace(/\s/,'')//delete all blanks
@@ -128,13 +126,6 @@ async function uploadLearn() {
                     body: JSON.stringify(learnCSV)
                 };
                 if(document.getElementById('regression').checked){
-
-                   /* var url = new URL("/learn"),
-                        params = {model_type: 'hybrid'}
-                    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-                    const response = fetch(url, options).then()
-*/
-
                     const response = fetch('/learn?model_type=regression', options).then(val=>{
                         alert("the file was upload");
                     }).catch(err=>{
