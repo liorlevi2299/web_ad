@@ -24,7 +24,8 @@ this web app is great for flight data investigation, and more.
 
 ## *Demos:*
 A link to the video of a demonstration:
-[demo](http://a.com)
+[demo](https://drive.google.com/drive/u/6/folders/17fathH4xXH0Y9K0sQ0ThmrRozqSYAwYr)
+- if the video shows it doesn't exist - download it.
 
 A link to the UML of the project:
 [UML](https://github.com/azranohad/web_ad/blob/master/web_ad_flowchart.jpg)
@@ -59,12 +60,22 @@ uploading, and after the message appeared you will see the table of the anomalie
 
 
 ## *How to contribute:*
-## *API:*
 If you want to send a post request yourself and not use our visualization - you must use the API below:
-```js
+## *API:*
 
-// code in js
-```
+| Method | Path | Query Parameters | Request Body | Response |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| POST  | /learn  | model_type: "hybrid"/"regression" | {train_data: &lt;DATA&gt;} | |
+| POST  | /detect  | | {predict_data: &lt;DATA&gt;} | &lt;ANOMALY&gt; |	
+
+You must do the POST /detect only after the POST /learn .
+examples for the data structures mentioned above:
+&lt;DATA&gt;:
+[{“altitude_gps”: [100, 110, 20, 120…], “heading_gps”: [0.6, 0.59, 0.54, 0.51, ...] }]
+
+&lt;ANOMALY&gt;:
+[{“altitude_gps”: [1, 2, 20, 120…], “heading_gps”: [3, 4, 5, 10, ...] }]
+
 
 
 
