@@ -82,3 +82,10 @@ examples for the data structures mentioned above:
 
 ## *Contributors:*
 Amit Ilovitch, Hila Levi, Ohad Azran, Lior Levi
+
+
+<img width="756" alt="webApp1" src="https://user-images.githubusercontent.com/73899381/139402775-ab5d8bb1-4b0e-4a4b-98fc-fb37e0f0525e.PNG">
+<img width="760" alt="webApp2" src="https://user-images.githubusercontent.com/73899381/139402792-3cb35876-195e-4e62-a49a-a94e6055fe57.PNG">
+<img width="960" alt="webApp4" src="https://user-images.githubusercontent.com/73899381/139402825-94260382-3d48-4ed7-b346-fdfaee4ce5bb.png">
+
+
